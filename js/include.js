@@ -1,16 +1,10 @@
+
 $(function () {
     includeHTML();
-
+    observeChanges($(".table"));
+    $("#addRow").on("click", addRowFunc);
+    $("#addCol").on("click", addColFunc);
 });
-//add Rows based on previous columns
-function addRow(){
-    //Get the last row and then add the next row
-    var childLst = arguments.currentTarget.parentElement.children;
-    var thisNode = childLst[chldLst.length - 2];
-    var cloneNode = $(thisNode).clone(true, true);
-    $(cloneNode)
-}
-
 
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
@@ -21,17 +15,90 @@ function includeHTML() {
         /*search for elements with a certain atrribute:*/
         file = elmnt.getAttribute("w3-include-html");
         if (file) {
+
             $.get(file, function (data) {
-                $(elem).html(data);
-                $(elem).removeAttribute("w3-include-html");
+                elmnt.innerHTML = data;
+                elmnt.removeAttribute("w3-include-html");
+                includeHTML();
             });
-            /* Exit the function: */
             return;
         }
     }
 }
-
 function changeLocation(txt) {
     var loc = location.href.substring(0, location.href.lastIndexOf("/"));
     location.href = loc + "/" + txt;
+}
+
+//Adds a row based on previous columns
+function addRowFunc() {
+    var parms = arguments;
+    //Target: get the last row and then add the next row
+    var childLst = parms[0].currentTarget.parentElement.children;
+    var node = childLst[childLst.length - 2];
+    var clonedNode = $(node).clone(true, true);//TODO initialise the row so all data is not copied as is
+    $(clonedNode).insertAfter(node);
+}
+
+//Adds a columns based on previous columns
+function addColFunc() {
+    var parms = arguments;
+    //console.log(parms);
+    //Target: get the last row and then add the next row
+    var childLst = $("#mainTable")[0].children;
+    //Assumption is that each row will have equal number of children
+    $.map(childLst, function (val, i) {
+        var lstChld = val.children[val.children.length - 2];
+        var clnlstChld = $(lstChld).clone(true, true);
+        $(clnlstChld).insertAfter(lstChld);
+    })
+}
+
+// Callback function to execute when mutations are observed
+var observationCallback = function (mutationsList, observer) {
+    //for (var mutation of mutationsList) {
+    $.map(mutationsList, function (mutation, i) {
+        if (mutation.type == 'childList') {
+            console.log('A child node has been added or removed.');
+            //console.log(mutation);
+            var targetTable = $(mutation.target)[0];
+            if (targetTable.id === "") {
+                targetTable = targetTable.parentElement;
+            }
+            $.map(targetTable.children, function (child, i) {
+                if (i == 0) {
+                    //TODO for further processing
+                } else {
+                    {
+                        $.each(child.children, function (l, subChild) {
+                            if (subChild.type !== "button") {
+                                if (i % 2 == 1) {
+                                    if (!subChild.firstElementChild || subChild.firstElementChild.localName !== "button") {
+                                        $(subChild).removeClass("bg-primary").addClass("bg-primary");
+                                    }
+                                } else {
+                                    $(subChild).removeClass("bg-primary");
+                                }
+                            }
+                            //console.log(subChild);
+                        });
+                    }
+                }
+            });
+        }
+        else if (mutation.type == 'attributes') {
+            console.log('The ' + mutation.attributeName + ' attribute was modified.');
+        }
+    });
+};
+
+function observeChanges(node) {
+    if (node.length == 0) {
+        return;
+    }
+    // Options for the observer (which mutations to observe)
+    var config = {attributes: true, childList: true, subtree: true};
+    var observer = new MutationObserver(observationCallback);
+    // Start observing the target node for configured mutations
+    observer.observe(node[0], config);
 }
