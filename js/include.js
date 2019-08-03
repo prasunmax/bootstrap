@@ -1,4 +1,3 @@
-
 $(function () {
     includeHTML();
     observeChanges($(".table"));
@@ -25,6 +24,7 @@ function includeHTML() {
         }
     }
 }
+
 function changeLocation(txt) {
     var loc = location.href.substring(0, location.href.lastIndexOf("/"));
     location.href = loc + "/" + txt;
@@ -37,12 +37,11 @@ function addRowFunc() {
     var childLst = parms[0].currentTarget.parentElement.children;
     var node = childLst[childLst.length - 2];
     var clonedNode = $(node).clone(true, true);//TODO initialise the row so all data is not copied as is
-    $(clonedNode).insertAfter(node);
+    $(clonedNode).insertAfter(node).hide().show('slow');
 }
 
 //Adds a columns based on previous columns
 function addColFunc() {
-    var parms = arguments;
     //console.log(parms);
     //Target: get the last row and then add the next row
     var childLst = $("#mainTable")[0].children;
@@ -50,8 +49,12 @@ function addColFunc() {
     $.map(childLst, function (val, i) {
         var lstChld = val.children[val.children.length - 2];
         var clnlstChld = $(lstChld).clone(true, true);
-        $(clnlstChld).insertAfter(lstChld);
+        $(clnlstChld).insertAfter(lstChld).hide().show('slow');
     })
+    var leftPos = $("#mainTable").parent().scrollLeft();
+    //$("#mainTable").parent().scrollLeft(leftPos + 200);
+    $("#mainTable").parent().animate({scrollLeft: leftPos + 200}, 800);
+
 }
 
 // Callback function to execute when mutations are observed
@@ -80,7 +83,6 @@ var observationCallback = function (mutationsList, observer) {
                                     $(subChild).removeClass("bg-primary");
                                 }
                             }
-                            //console.log(subChild);
                         });
                     }
                 }
