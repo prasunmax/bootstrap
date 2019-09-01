@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="title icon" type="image/png" href="images/title-img.png"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" crossorigin="anonymous">
+    <!--    fontawesome-->
+    <script defer src="js/all.js"></script>
+    <title>Pure Bootstrap Website</title>
+</head>
+<body class="bg-info">
+<div w3-include-html="htmlf/navbar.html"></div>
+<!-- banner -->
+<section>
+    <div class="container">
+        <div class="row responsive justify-content-center align-content-start" style="height:100vh;">
+            <p class="text-warning">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, consequuntur optio vero minima aliquam
+                tempora possimus repudiandae, officia officiis fugit, aut dicta totam illum ipsum ullam quasi.
+            </p>
+            <div class="row col-12" style="overflow-x: scroll">
+                <div id="mainTable" class="col table justify-content-center float-left" style="width: 100%">
+                    <div class="row flex-nowrap">
+                        <div class="col-2 bg-warning table-bordered">colh0</div>
+                        <div class="col-2 bg-warning table-bordered">colh1</div>
+                        <div class="col-2 bg-warning table-bordered">colh2</div>
+                        <div class="col-2 bg-warning table-bordered">colh3</div>
+                        <div class="col-2 bg-warning table-bordered">colh4</div>
+                        <div class="col-1">
+                            <button id="addCol" class="btn btn-sm btn-outline-light">+</button>
+                        </div>
+                    </div>
+                    <div class="row flex-nowrap">
+                        <div class="col-2 table-bordered">col0</div>
+                        <div class="col-2 table-bordered">col1</div>
+                        <div class="col-2 table-bordered">col2</div>
+                        <div class="col-2 table-bordered">col3</div>
+                        <div class="col-2 table-bordered">col4</div>
+                        <div class="col-1">
+                            <button class="removeCol btn btn-sm btn-outline-light">-</button>
+                        </div>
+                    </div>
+                    <div class="row flex-nowrap">
+                        <div class="col-2 table-bordered">col0</div>
+                        <div class="col-2 table-bordered">col1</div>
+                        <div class="col-2 table-bordered">col2</div>
+                        <div class="col-2 table-bordered">col3</div>
+                        <div class="col-2 table-bordered">col4</div>
+                        <div class="col-1">
+                            <button class="removeCol btn btn-sm btn-outline-light">-</button>
+                        </div>
+                    </div>
+                    <button id="addRow" class="row btn btn-sm btn-warning">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of banner -->
+<br>
+<br>
+<br>
+<br>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="js/popper.min.js" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="js/include.js" crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        includeHTML();
+    });
+</script>
+</body>
+</html>
