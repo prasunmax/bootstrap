@@ -1,4 +1,4 @@
-package prasun.bootstrap;
+package prasun.bootstrap.config;
 
 import javax.sql.DataSource;
 

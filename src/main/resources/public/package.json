@@ -1,0 +1,23 @@
+{
+  "name": "Bootstrap_and_JQuery",
+  "version": "1.0.0",
+  "description": "Project using Jquery and Bootsrap",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1"
+  },
+  "keywords": [
+    "jquery",
+    "progressive",
+    "web",
+    "app",
+    "complete",
+    "bootstrap"
+  ],
+  "author": "Prasun Das",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "livereload": "^0.8.0"
+  }
+}
